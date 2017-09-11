@@ -1,0 +1,92 @@
+---
+- name: CMPE272 - HOMEWORK 1 - Deploy
+  hosts: aws
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  tags:
+    - deploy
+
+  vars:
+    site_http_port: 80
+    site_domain: cmpe272.com
+
+  tasks:
+  - name: install apache
+    apt:
+      name: apache2
+      state: latest
+      update_cache: yes
+
+  - name: start apache
+    service:
+      name: apache2
+      state: started
+
+  - name: create virtual host file
+    template:
+      src: template_vhost.conf
+      dest: /etc/apache2/sites-available/{{ site_domain }}.conf
+
+  - name: create our Hello World website folder
+    file:
+      path: /var/www/{{ site_domain }}
+      state: directory
+
+  - name: copy our Hello World website
+    copy:
+      src: site/index.html
+      dest: /var/www/{{ site_domain }}
+
+  - name: disable apache default website
+    command: a2dissite 000-default.conf
+
+  - name: enable site {{ site_domain }}
+    command: a2ensite {{ site_domain }}
+    args:
+      creates: /etc/apache2/sites-enabled/{{ site_domain }}.conf
+    notify:
+      - restart apache
+
+  handlers:
+  - name: restart apache
+    service:
+      name: apache2
+      state: restarted
+
+
+
+- name: CMPE272 - HOMEWORK 1 - Un-Deploy
+  hosts: aws
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  tags:
+    - undeploy
+
+  vars:
+    site_http_port: 80
+    site_domain: cmpe272.com
+
+  tasks:
+  - name: delete our Hello World website folder
+    file:
+      path: /var/www/{{ site_domain }}
+      state: absent
+
+  - name: delete our virtual host file
+    file:
+      path: /etc/apache2/sites-available/{{ site_domain }}.conf
+      state: absent
+
+  - name: delete apache www folder
+    file:
+      path: /var/www
+      state: absent
+
+  - name: uninstall apache
+    apt:
+      name: apache2
+      state: absent
+      update_cache: yes
+      purge: yes
