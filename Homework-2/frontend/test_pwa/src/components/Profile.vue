@@ -1,8 +1,8 @@
 <template>
   <div class="profile">
     <div class="profile-image" />
-    <h1>{{ loggedUser.firstName }} {{ loggedUser.lastName }}</h1>
-    <h4>Following: {{ loggedUser.numOfFollowing }}   |   Followers: {{ loggedUser.numOfFollowers }}</h4>
+    <h1>{{ loggedUser.name }}</h1>
+    <h4>Following: {{ loggedUser.friends_count }}   |   Followers: {{ loggedUser.followers_count }}</h4>
     <ul>
       <li v-for="tweet in tweets">        
         <div class ="tweet">
@@ -14,7 +14,7 @@
             <div>{{ tweet.screen_name }}</div>
             <span>{{ tweet.text }}</span>            
             <div class="rightFooter">
-              <button v-on:click="greet(tweet.id_str)" class="btRetweet">Retweet</button>
+              <button v-if="isMineTweet() == false" v-on:click="alertPopup(tweet.id_str)" class="btRetweet">Retweet</button>
             </div>
           </div>
         </div>
@@ -30,10 +30,10 @@ export default {
   data () {
     return {
       loggedUser:{
-        firstName: '[FirstName]',
-        lastName: '[LastName]',
-        numOfFollowing: '240',
-        numOfFollowers: '10',
+        name: 'John Doe',
+        friends_count: '240', // following
+        followers_count: '10', // followers
+        id_str: ''
       },
       tweets : [{
           id_str: "123456780",
@@ -56,11 +56,23 @@ export default {
       ]
     }
   },
+  // beforeCreate: function () {
+  //   if (!this.$session.exists() || !this.$session.has('id_str')) {
+  //     this.$router.push('/')
+  //   }
+  // },
   methods: {
-    greet: function(msg) {
+    alertPopup: function(msg) {
         // `this` inside methods points to the Vue instance
-        alert('Hello! Tweet ID=' + msg)      
-      }
+        alert('ReTweet (ID=' + msg + ') success!')
+    },
+    isLoggedUser: function() {
+      return true
+    },
+    isMineTweet: function() {
+      return false
+    }
+
   }
 }
 </script>
