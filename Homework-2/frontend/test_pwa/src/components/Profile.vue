@@ -86,6 +86,9 @@ h1, h2 {
 ul {
   list-style-type: none;
   padding: 0;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
