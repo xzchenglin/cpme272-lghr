@@ -1,3 +1,4 @@
+<!-- Created by Renato -->
 <template>  
   <span>Hi</span>
 </template>

@@ -1,3 +1,4 @@
+<!-- Created by Renato -->
 <template>
   <div class="profile">
     <div class="profile-image" />
