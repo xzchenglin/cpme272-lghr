@@ -3,9 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
 import session from 'vue-session'
+import resource from 'vue-resource'
+
 Vue.use(session)
+
+Vue.use(resource)
 
 Vue.config.productionTip = false
 

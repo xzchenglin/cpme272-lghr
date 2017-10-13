@@ -25,6 +25,16 @@ export default {
   methods: {
     loginTwitter: function(msg) {
         // add here code that call the Twitter API to login
+
+
+        this.$http.get('http://ip.jsontest.com/').then(function(data){
+            console.log(data.body);            
+
+        }, function(error) {
+            // handle errors
+        });
+
+
     },    
 
   }
