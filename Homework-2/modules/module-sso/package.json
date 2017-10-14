@@ -1,0 +1,22 @@
+{
+  "name": "module-sso",
+  "version": "1.0.0",
+  "description": "SSO Module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "express-session": "^1.15.5",
+    "https": "^1.0.0",
+    "passport": "^0.4.0",
+    "passport-twitter": "^1.0.4"
+  }
+}
