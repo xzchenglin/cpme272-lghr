@@ -27,13 +27,20 @@ export default {
         // add here code that call the Twitter API to login
 
 
-        this.$http.get('http://ip.jsontest.com/').then(function(data){
-            console.log(data.body);            
+        // this.$http.get('http://ip.jsontest.com/').then(function(data){
+        //     console.log(data.body);            
+
+        // }, function(error) {
+        //     // handle errors
+        // });
+        
+
+        this.$http.get('http://module-sso.teamlghr.site/auth/twitter').then(function(data){
+            console.log(data);            
 
         }, function(error) {
             // handle errors
         });
-
 
     },    
 

@@ -18,7 +18,7 @@ module.exports = function (app) {
   passport3.use(new TwitterStrategy({
       consumerKey: keys['twitter'].consumerKey, // 'T4xpAE2Jy5P1KgnmC5TAfiXSi',
       consumerSecret: keys.twitter.consumerSecret, //'mmMORcdCBHN6cKbHoOrUBYfSJzzIeGu4RwzD5EzLfGNq4Tz1eM',
-      callbackURL: 'https://www.teamlghr.site/auth/twitter/callback',
+      callbackURL: 'https://module-sso.teamlghr.site/auth/twitter/callback',
       passReqToCallback: true
     },
     function (req, token, tokenSecret, profile, done) {

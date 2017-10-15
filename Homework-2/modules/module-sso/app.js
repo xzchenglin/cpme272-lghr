@@ -11,6 +11,9 @@ const auth = require('./routes/auth');
 const cors = require("cors");
 
 
+
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
@@ -36,6 +39,6 @@ app.use('/auth', auth);
 
 
 
-app.listen(3000)
+app.listen(4000)
 
 
