@@ -33,18 +33,21 @@ export default {
           //this.$router.push({ name: 'Paramdetails', params: { id: this.UserInput }})
         }
   },
-  beforeCreate() {
-    console.log("hi from beforeCreated - Home")
-    
-    
+  beforeCreate() {    
+    console.log("Home | beforeCreated")
+
   },
 
   created(){
-    console.log("hi from Created - Home")
 
+    console.log("Home | Created")
 
+    
     var queryToken = this.$route.query.token
-    var savedToken = localStorage.getItem('token')
+    //var savedToken = localStorage.getItem('token')
+    var savedToken = this.$session.get('token')
+    console.log("queryToken=" + queryToken)
+    console.log("savedToken=" + savedToken)
 
     if(queryToken==undefined && savedToken==undefined){
         console.log("user don't have token. Redirecting him to Login")
@@ -52,6 +55,23 @@ export default {
         return
     }
     
+
+
+    if (queryToken) {
+      //localStorage.set('token', queryToken)
+      this.$session.set('token',queryToken)
+    }
+
+
+
+    //   var options = {
+    //     keyword: 'trump',
+    //     ip: '127.0.0.1'
+    // }
+    // this.lghrAPIRequest(this, "Search", options, "GET")
+
+
+    this.$router.push("/Profile")
 
 
 
@@ -74,6 +94,9 @@ export default {
     // }
       
 
+  },
+  mounted(){
+    console.log("Home | mounted")
   }
 
 

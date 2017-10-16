@@ -4,7 +4,7 @@
       <span>LGHR Twitter API</span>
       <div class="header-menu">
         <router-link v-bind:to="'/'">Home</router-link>
-        <router-link v-bind:to="'/Login'">Login</router-link>
+        <router-link v-if="isLoggedUser() == false" v-bind:to="'/Login'">Login</router-link>
         <router-link v-bind:to="'/Tweet'">Tweet</router-link>
         <router-link v-bind:to="'/Search'">Search</router-link>
       </div>
@@ -14,7 +14,7 @@
       
     </header>
     <main>
-      <!-- <img src="./assets/logo.png" alt="Vue.js PWA"><br /> -->       
+      <!-- <img src="./assets/logo.png" alt="Vue.js PWA"><br /> -->
       <router-view></router-view>
     </main>
   </div>
@@ -22,7 +22,18 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  data () {
+    return {
+      //isLoggedUser: false
+    }
+  },
+   methods: {    
+     isLoggedUser: function() {      
+        return (this.$session.get('token') != undefined)            
+     },    
+
+   }
 }
 </script>
 

@@ -44,16 +44,20 @@ const router = new Router({
 
 
 router.beforeEach((to, from, next) => {
-    console.log("router.beforeEach | to.path=" + to.path)
-    console.log("router.beforeEach | to" + to)
+    //console.log("router.beforeEach | to.path=" + to.path)
+    //console.log("router.beforeEach | to" + to)
     if(to.path != '/' ){
-      console.log("router.beforeEach | entrou - ")
+      //console.log("router.beforeEach | entrou - ")
       
      
-      if(localStorage.getItem('user')==undefined){
-        console.log("router.beforeEach | don't exist")
+      // if(localStorage.getItem('user')==undefined){
+      //   console.log("router.beforeEach | don't exist")
 
-      }
+      // }
+            
+
+
+
             //prompt for username
         //     var user = prompt('please enter your username');
         //     //prompt for password

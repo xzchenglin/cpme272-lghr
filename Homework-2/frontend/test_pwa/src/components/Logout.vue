@@ -12,6 +12,7 @@ export default {
   },
   beforeCreate: function () {
     this.$session.destroy()
+    //this.localStorage.remove('token')
     this.$router.push('/')
   },
   
