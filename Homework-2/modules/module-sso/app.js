@@ -1,3 +1,5 @@
+// created by Yu Xu
+
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser');
@@ -9,8 +11,6 @@ const users = require('./routes/users');
 const auth = require('./routes/auth');
 
 const cors = require("cors");
-
-
 
 
 

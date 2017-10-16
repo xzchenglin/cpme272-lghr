@@ -1,14 +1,25 @@
+// created by Yu Xu
+
 var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res) {
-  res.send('hello world');
     console.log(req.user);
-    /*user: {
-      name: req.user.displayName,
-      image: req.user._json.image.url
-    }*/
+
+    //res.send(req.user);
+    
+    const token = req.user.token
+    const id_str = req.user.id_str
+    const provider = req.user.provider
+
+    const url = 'http://www.teamlghr.site/Home?token=' + token + "&id_str=" + id_str + "&provider=" + provider;
+
+    res.writeHead(301,
+	  {Location: url}
+	);
+	res.end();
+
 });
 
 module.exports = router;

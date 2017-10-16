@@ -1,3 +1,5 @@
+// created by Yu Xu
+
 var passport3 = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
 
@@ -16,22 +18,27 @@ module.exports = function (app) {
 
 
   passport3.use(new TwitterStrategy({
-      consumerKey: keys['twitter'].consumerKey, // 'T4xpAE2Jy5P1KgnmC5TAfiXSi',
-      consumerSecret: keys.twitter.consumerSecret, //'mmMORcdCBHN6cKbHoOrUBYfSJzzIeGu4RwzD5EzLfGNq4Tz1eM',
-      callbackURL: 'https://module-sso.teamlghr.site/auth/twitter/callback',
+      consumerKey: keys.twitter.consumerKey,
+      consumerSecret: keys.twitter.consumerSecret,
+      callbackURL: 'http://module-sso.teamlghr.site/auth/twitter/callback',
       passReqToCallback: true
     },
     function (req, token, tokenSecret, profile, done) {
-      //      var user = {};
+            //var user = {};
       //      //user.email = profile.emails[0].value;
       //      user.image = profile._json.image.url;
       //      user.displayName = profile.displayName;
       //
-      //      user.twitter = {};
-      //      user.twitter.id = profile.id;
-      //      user.twitter.token = token;
-      console.log(profile);
-      done(null, profile);
+          
+      var user = {}
+      user.id_str = profile.id; // profile.id == profile._raw.id_str
+      user.token = token;
+      user.provider = "twitter";
 
+
+      //console.log(profile);
+      //console.log("user=");
+      //console.log(user);
+      done(null, user);
     }))
 };
