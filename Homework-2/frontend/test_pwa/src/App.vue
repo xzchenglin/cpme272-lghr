@@ -9,7 +9,7 @@
         <router-link v-bind:to="'/Search'">Search</router-link>
       </div>
       <div class="header-logout">
-        <router-link v-bind:to="'/Logout'">Logout</router-link>
+        <router-link v-if="isLoggedUser()" v-bind:to="'/Logout'">Logout</router-link>
       </div>
       
     </header>
@@ -59,7 +59,7 @@ main {
   width: 400px;
   margin-left: auto;
   margin-right: auto;
-  background-color: black;
+  //background-color: white;
   text-align: center;
 }
 
@@ -86,4 +86,21 @@ header span {
   padding-top: 16px;
   float: left;
 }
+
+a:link {
+    color: white;
+}
+
+a:visited {
+    color: white;
+}
+
+a:hover {
+    color: blue;
+}
+
+a:active {
+    color: black;
+}
+
 </style>
