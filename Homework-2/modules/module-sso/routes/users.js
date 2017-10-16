@@ -13,9 +13,9 @@ router.get('/', function (req, res) {
     const id_str = req.user.id_str
     const provider = req.user.provider
 
-    const url = 'http://www.teamlghr.site/Home?token=' + token + "&id_str=" + id_str + "&provider=" + provider;
+    const url = 'http://www.teamlghr.site/#/?token=' + token + "&id_str=" + id_str + "&provider=" + provider;
 
-    res.writeHead(301,
+    res.writeHead(302,
 	  {Location: url}
 	);
 	res.end();
