@@ -3,8 +3,8 @@
     <header>
       <span>LGHR Twitter API</span>
       <div class="header-menu">
-        <router-link v-bind:to="'/'">Hello</router-link>
-        <router-link v-bind:to="'/Home'">Home</router-link>
+        <router-link v-bind:to="'/'">Home</router-link>
+        <router-link v-bind:to="'/Login'">Login</router-link>
         <router-link v-bind:to="'/Tweet'">Tweet</router-link>
         <router-link v-bind:to="'/Search'">Search</router-link>
       </div>

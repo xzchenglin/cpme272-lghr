@@ -2,7 +2,7 @@
 <template>
   <div class="login">    
     <!-- add here the SSO login button -->
-  <button v-on:click="loginTwitter()">Login with Twitter</button>
+  <button v-on:click="loginTwitter()"></button>
   </div>
 </template>
 
@@ -26,21 +26,24 @@ export default {
     loginTwitter: function(msg) {
         // add here code that call the Twitter API to login
 
-
         // this.$http.get('http://ip.jsontest.com/').then(function(data){
         //     console.log(data.body);            
 
         // }, function(error) {
         //     // handle errors
+        // });        
+
+
+
+        // this.$http.get('http://module-sso.teamlghr.site/auth/twitter').then(function(data){
+        //     console.log(data);            
+
+        // }, function(error) {
+        //     // handle errors
         // });
-        
 
-        this.$http.get('http://module-sso.teamlghr.site/auth/twitter').then(function(data){
-            console.log(data);            
 
-        }, function(error) {
-            // handle errors
-        });
+        window.location.href = "http://module-sso.teamlghr.site/auth/twitter"
 
     },    
 
@@ -50,15 +53,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-h1, h2 {
-  font-weight: normal;
+
+
+button {
+  background: url(./../assets/sign-in-with-twitter-gray.png) no-repeat;
+  border:none;
+  width:158px;
+  height:28px;
+  cursor: pointer;
 }
 
 
-
-
-
-a {
-  color: #35495E;
-}
 </style>

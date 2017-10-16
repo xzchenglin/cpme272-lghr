@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+import Home from '@/components/Home'
 import Profile from '@/components/Profile'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
@@ -11,19 +11,14 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Home',
+      component: Home
     },
     {
       path: '/Profile',
       name: 'Profile',
       component: Profile
-    },
-    {
-      path: '/Home',
-      name: 'Home',
-      component: Login
-    },
+    },    
     {
       path: '/Tweet',
       name: 'Tweet',
@@ -39,18 +34,24 @@ const router = new Router({
       name: 'Logout',
       component: Logout
     },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login
+    },
   ]
 })
 
 
 router.beforeEach((to, from, next) => {
-    console.log("to.path=" + to.path)
+    console.log("router.beforeEach | to.path=" + to.path)
+    console.log("router.beforeEach | to" + to)
     if(to.path != '/' ){
-      console.log("entrou - ")
+      console.log("router.beforeEach | entrou - ")
       
      
       if(localStorage.getItem('user')==undefined){
-        console.log("don't exist")
+        console.log("router.beforeEach | don't exist")
 
       }
             //prompt for username

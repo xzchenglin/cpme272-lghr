@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+    <h2>Essential Links 23</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
       <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
@@ -24,9 +24,62 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js PWA!!!'
+      msg: 'Validating Token...'
     }
+  },
+  methods:{
+        GoToRoute(){
+          this.$router.push("/Profile")
+          //this.$router.push({ name: 'Paramdetails', params: { id: this.UserInput }})
+        }
+  },
+  beforeCreate() {
+    console.log("hi from beforeCreated - Home")
+    
+    
+  },
+
+  created(){
+    console.log("hi from Created - Home")
+
+
+    var queryToken = this.$route.query.token
+    var savedToken = localStorage.getItem('token')
+
+    if(queryToken==undefined && savedToken==undefined){
+        console.log("user don't have token. Redirecting him to Login")
+        this.$router.push("/Login")
+        return
+    }
+    
+
+
+
+
+    // var onTokenValid = function(vuee) {
+    //     //this.$router.push("/Profile")
+    //     vuee.GoToRoute()
+    // }
+    // //onTokenValid(this)
+
+
+
+    // // var rbl = require("./../rb-libs")
+    // // rbl.hi()
+
+
+    // if(localStorage.getItem('user')==undefined){
+    //     console.log("don't exist")
+
+    // }
+      
+
   }
+
+
+
+
+
 }
 </script>
 
