@@ -1,3 +1,4 @@
+<!-- Created by Renato -->
 <template>
   <div id="app">
     <header>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Profile from '@/components/Profile'
+import Search from '@/components/Search'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
 
@@ -27,7 +28,7 @@ const router = new Router({
     {
       path: '/Search',
       name: 'Search',
-      component: Profile
+      component: Search
     },
     {
       path: '/Logout',
