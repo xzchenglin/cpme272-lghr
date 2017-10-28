@@ -1,6 +1,6 @@
 <!-- Created by Yu Xu -->
 <template>
-  <div class="login">    
+  <div class="login">
     <!-- add here the SSO login button -->
 
   <input v-model="keyword" placeholder="Enter word, username,.... ">  <button v-on:click="onSearch()">Go</button>
@@ -17,16 +17,27 @@ export default {
     return {
       keyword: ""
     }
-  },  
+  },
   methods: {
     onSearch: function() {
         console.log("Going to search for: " + this.keyword)
 
-        var options = {
-            keyword: this.keyword,
-        }
-        this.lghrAPIRequest(this, "Search", options, "GET")
-    },    
+        // var data = {
+        //     keyword: this.keyword,
+        // }
+        var data = {}
+
+
+        this.lghrAPIRequest(this, "Search", data, "POST",
+        function(data) { // on success
+          console.log("on sucess")
+          console.log(data);
+        },
+        function(error) {  // on error
+          console.log("on error")
+          console.log(error);
+        })
+    },
 
   }
 }
@@ -41,7 +52,7 @@ input {
   width: 200px;
 }
 button {
-  
+
   border:none;
   width:28px;
   height:28px;

@@ -1,9 +1,8 @@
 // created by Renato
 var MyPlugin = {}
 
-const apiURL = "http://ip.jsontest.com/"
-
-
+//const apiURL = "http://ip.jsontest.com/"
+const apiURL = "http://138.68.52.9:8000/twitter/api"
 
 const getJSON = function(vueObject, endpoint, paramsObject, onSuccess, onFail, method, pluginOptions) {
 
@@ -15,7 +14,7 @@ url = apiURL
 		console.log("on callback success")
 		console.log(response)
 		var body = response.body
-		//console.log("ip=" + body.params.ip)		
+		//console.log("ip=" + body.params.ip)
 		if (onSuccess) {
 			onSuccess(body)
 		}
@@ -25,7 +24,7 @@ url = apiURL
 		console.log(response)
 		var body = response.body
 
-		
+
 		if (body.errorCode == 1) {  // errorCode == 1 is Invalid Token
 			vueObject.$route.push("/Logout")
 			return
@@ -43,11 +42,11 @@ url = apiURL
 
 	if (method && method.toLowerCase() == "get") {
 		options.params = paramsObject
-		vueObject.$http.get(url, options).then(onResultSuccess, onResultFail);		
+		vueObject.$http.get(url, options).then(onResultSuccess, onResultFail);
 	} else {
-		vueObject.$http.post(url, paramsObject , options).then(onResultSuccess, onResultFail);		
+		vueObject.$http.post(url, paramsObject , options).then(onResultSuccess, onResultFail);
 	}
-	
+
 }
 
 
@@ -56,18 +55,18 @@ url = apiURL
 
 MyPlugin.install = function (Vue, options) {
   // 1. add global method or property
-  Vue.prototype.lghrAPIRequest = function (vueObject, cmd, paramsObject, method, onSuccess, onFail) {
+  Vue.prototype.lghrAPIRequest = function (vueObject, cmd, data, method, onSuccess, onFail) {
     // something logic ...
     console.log("hi grom lghr api")
 
     //console.table(options)
     //console.table(vueObject)
 
-    if (paramsObject==undefined){ paramsObject = {} }
+    if (data==undefined){ data = {} }
 
-    const params = { 'cmd': cmd, 'params':paramsObject, 'method':method, 'token':vueObject.$session.get('token') } 
+    const params = { 'action': cmd, 'data':data, 'method':method, 'token':vueObject.$session.get('token') }
 
-    
+
     getJSON(vueObject, cmd, params, onSuccess, onFail, "POST", options)
 
 
@@ -79,7 +78,7 @@ MyPlugin.install = function (Vue, options) {
     // 		console.log(response)
     // 		var body = response.body
     // 		console.log("ip=" + body.ip)
-    	
+
     // 	}, function(response){ // on fail
     // 		console.log("on callback FAILED")
     // 		console.log(response)
@@ -90,7 +89,7 @@ MyPlugin.install = function (Vue, options) {
 
 
   }
-  
+
 }
 
 module.exports = MyPlugin
