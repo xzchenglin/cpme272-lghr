@@ -29,10 +29,11 @@ module.exports = function (app) {
       //      user.image = profile._json.image.url;
       //      user.displayName = profile.displayName;
       //
-          
+
       var user = {}
       user.id_str = profile.id; // profile.id == profile._raw.id_str
-      user.token = token;
+      user.token = token;     // user access token
+      user.tokenSecret = tokenSecret; // user access token secret
       user.provider = "twitter";
 
 
