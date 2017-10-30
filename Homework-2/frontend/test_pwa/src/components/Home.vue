@@ -2,27 +2,12 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links 23</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="http://chat.vuejs.org/" target="_blank" rel="noopener">Vue Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank" rel="noopener">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'hello',
+  name: 'home',
   data () {
     return {
       msg: 'Validating Token...'
@@ -34,7 +19,7 @@ export default {
           //this.$router.push({ name: 'Paramdetails', params: { id: this.UserInput }})
         }
   },
-  beforeCreate() {    
+  beforeCreate() {
     console.log("Home | beforeCreated")
 
   },
@@ -43,7 +28,7 @@ export default {
 
     console.log("Home | Created")
 
-    
+
     var queryToken = this.$route.query.token
     //var savedToken = localStorage.getItem('token')
     var savedToken = this.$session.get('token')
@@ -55,53 +40,24 @@ export default {
         this.$router.push("/Login")
         return
     }
-    
+
 
 
     if (queryToken) {
       //localStorage.set('token', queryToken)
       this.$session.set('token',queryToken)
+      var tokenSecret = this.$route.query.tokenSecret
+      console.log("tokenSecret=" + tokenSecret)
+      this.$session.set('tokenSecret',tokenSecret)
     }
-
-
-
-    //   var options = {
-    //     keyword: 'trump',
-    //     ip: '127.0.0.1'
-    // }
-    // this.lghrAPIRequest(this, "Search", options, "GET")
-
 
     this.$router.push("/Profile")
 
-
-
-
-    // var onTokenValid = function(vuee) {
-    //     //this.$router.push("/Profile")
-    //     vuee.GoToRoute()
-    // }
-    // //onTokenValid(this)
-
-
-
-    // // var rbl = require("./../rb-libs")
-    // // rbl.hi()
-
-
-    // if(localStorage.getItem('user')==undefined){
-    //     console.log("don't exist")
-
-    // }
-      
 
   },
   mounted(){
     console.log("Home | mounted")
   }
-
-
-
 
 
 }

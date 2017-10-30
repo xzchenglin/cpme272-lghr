@@ -5,14 +5,18 @@
       <span>LGHR Twitter API</span>
       <div class="header-menu">
         <router-link v-bind:to="'/'">Home</router-link>
-        <router-link v-if="isLoggedUser() == false" v-bind:to="'/Login'">Login</router-link>
-        <router-link v-bind:to="'/Tweet'">Tweet</router-link>
-        <router-link v-bind:to="'/Search'">Search</router-link>
+        <!-- <router-link v-if="isLoggedUser() == false" v-bind:to="'/Login'">Login</router-link> -->
+        <router-link v-if="isLoggedUser()" v-bind:to="'/ShowFollowing'">Show Following</router-link>
+        <router-link v-if="isLoggedUser()" v-bind:to="'/ShowFollowers'">Show Followers</router-link>
+        <router-link v-if="isLoggedUser()" v-bind:to="'/ShowFavorites'">Show Favorites Tweets</router-link>
+        <router-link v-if="isLoggedUser()" v-bind:to="'/PostTweet'">Post Tweet</router-link>
+        <router-link v-if="isLoggedUser()" v-bind:to="'/Search'">Search Tweet</router-link>
+        <router-link v-if="isLoggedUser()" v-bind:to="'/SearchPlace'">Search Place</router-link>
       </div>
       <div class="header-logout">
         <router-link v-if="isLoggedUser()" v-bind:to="'/Logout'">Logout</router-link>
       </div>
-      
+
     </header>
     <main>
       <!-- <img src="./assets/logo.png" alt="Vue.js PWA"><br /> -->
@@ -29,10 +33,10 @@ export default {
       //isLoggedUser: false
     }
   },
-   methods: {    
-     isLoggedUser: function() {      
-        return (this.$session.get('token') != undefined)            
-     },    
+   methods: {
+     isLoggedUser: function() {
+        return (this.$session.get('token') != undefined)
+     },
 
    }
 }
@@ -56,8 +60,8 @@ main {
 }
 
 .header-menu {
-  
-  width: 400px;
+
+  width: 800px;
   margin-left: auto;
   margin-right: auto;
   //background-color: white;

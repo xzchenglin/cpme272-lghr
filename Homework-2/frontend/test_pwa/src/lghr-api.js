@@ -1,14 +1,13 @@
 // created by Renato
 var MyPlugin = {}
 
-//const apiURL = "http://ip.jsontest.com/"
-const apiURL = "http://138.68.52.9:8000/twitter/api"
+const apiURL = "http://api.teamlghr.site/twitter/api"
 
+
+//const apiURL = "http://54.67.27.158:8081/twitter/api"
 const getJSON = function(vueObject, endpoint, paramsObject, onSuccess, onFail, method, pluginOptions) {
 
-	var url = apiURL + endpoint
-
-url = apiURL
+	var url = apiURL
 
 	const onResultSuccess = function(response){
 		console.log("on callback success")
@@ -16,12 +15,12 @@ url = apiURL
 		var body = response.body
 		//console.log("ip=" + body.params.ip)
 		if (onSuccess) {
-			onSuccess(body)
+			onSuccess(body, vueObject)
 		}
 	}
 	const onResultFail = function(response){
 		console.log("on callback FAILED")
-		console.log(response)
+		console.log(response, vueObject)
 		var body = response.body
 
 
@@ -35,7 +34,7 @@ url = apiURL
 		}
 	}
 
-	var headers = {"Content-Type":  "application/json"}
+	var headers = {"Content-Type":  "text/plain"} //using text/plain we avoid CORS issues (and sending the OPTIONS method before the POST)
 
 	var options = {}
 	options.headers = headers
@@ -44,7 +43,10 @@ url = apiURL
 		options.params = paramsObject
 		vueObject.$http.get(url, options).then(onResultSuccess, onResultFail);
 	} else {
-		vueObject.$http.post(url, paramsObject , options).then(onResultSuccess, onResultFail);
+		//console.table(paramsObject)
+		var jsonBody = vueObject.$JSON.stringify(paramsObject);
+		console.log(jsonBody);
+		vueObject.$http.post(url, jsonBody , options).then(onResultSuccess, onResultFail);
 	}
 
 }
@@ -64,7 +66,29 @@ MyPlugin.install = function (Vue, options) {
 
     if (data==undefined){ data = {} }
 
-    const params = { 'action': cmd, 'data':data, 'method':method, 'token':vueObject.$session.get('token') }
+    const accessToken = vueObject.$session.get('token');
+	const accessTokenSecret = vueObject.$session.get('tokenSecret');
+
+	// JAME's
+	// const accessToken = "904211533822955520-1bUicMh60bxTwu0NyOZHPHrNo5tRRDz"
+	// const accessTokenSecret = "QKeebkymJpKXCIthgFNgy6LOKkbz3Y7mJsXE0bGQhWYuD"
+
+	// // GENE's
+	// const accessToken = "63268320-yF85DzYGmoI1xYjxDG5pyXVWX8Bf8ra6lyvewIw9I"
+	// const accessTokenSecret = "P7c8HiuOSLDspUrsPEH46if2FycTt7kYmjtWu5J8td6a2"
+
+	// // RENATO's
+	// const accessToken =  "259456436-ySNtoAiAbZ5fiP4jpEaipGJisDhnWpVcnAX3WYVs"
+	// const accessTokenSecret "tokenSecret=KtcYZjqjKYocYlqIq7H3g81mf5IVhAnWbGQQ92o1rs6eN"
+
+    const params = { 'action': cmd,
+				'data':data,
+				'method':method,
+				'credentials': {
+					'accessToken': accessToken,
+					'accessTokenSecret': accessTokenSecret
+				}
+			}
 
 
     getJSON(vueObject, cmd, params, onSuccess, onFail, "POST", options)

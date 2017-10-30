@@ -1,8 +1,14 @@
+// Created by Renato
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Profile from '@/components/Profile'
+import ShowFollowing from '@/components/ShowFollowing'
+import ShowFollowers from '@/components/ShowFollowers'
+import ShowFavorites from '@/components/ShowFavorites'
+import PostTweet from '@/components/PostTweet'
 import Search from '@/components/Search'
+import SearchPlace from '@/components/SearchPlace'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
 
@@ -19,16 +25,36 @@ const router = new Router({
       path: '/Profile',
       name: 'Profile',
       component: Profile
-    },    
+    },
     {
-      path: '/Tweet',
-      name: 'Tweet',
-      component: Profile
+      path: '/ShowFollowing',
+      name: 'ShowFollowing',
+      component: ShowFollowing
+    },
+    {
+      path: '/ShowFollowers',
+      name: 'ShowFollowers',
+      component: ShowFollowers
+    },
+    {
+      path: '/ShowFavorites',
+      name: 'ShowFavorites',
+      component: ShowFavorites
+    },
+    {
+      path: '/PostTweet',
+      name: 'PostTweet',
+      component: PostTweet
     },
     {
       path: '/Search',
       name: 'Search',
       component: Search
+    },
+    {
+      path: '/SearchPlace',
+      name: 'SearchPlace',
+      component: SearchPlace
     },
     {
       path: '/Logout',
@@ -49,13 +75,13 @@ router.beforeEach((to, from, next) => {
     //console.log("router.beforeEach | to" + to)
     if(to.path != '/' ){
       //console.log("router.beforeEach | entrou - ")
-      
-     
+
+
       // if(localStorage.getItem('user')==undefined){
       //   console.log("router.beforeEach | don't exist")
 
       // }
-            
+
 
 
 
@@ -76,7 +102,7 @@ router.beforeEach((to, from, next) => {
         //     return;
         //     }
 
-        
+
     }
 
     next()
