@@ -1,0 +1,10 @@
+service\processor\ListProcessor.class
+service\processor\CreateProcessor.class
+service\helper\JsonHelper.class
+service\processor\GetProcessor.class
+service\processor\PostProcessor.class
+service\processor\DeleteProcessor.class
+service\processor\ServerPostProcessor.class
+service\CamelService.class
+service\RestService$1.class
+service\RestService.class
