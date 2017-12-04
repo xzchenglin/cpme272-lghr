@@ -27,9 +27,9 @@
             <result property="state" column="state" />
             <result property="creditLimit" column="creditLimit" />
             <!--<collection property="payments" ofType="PAYMENT">-->
-                <!--<result property="checkNumber" column="checkNumber" />-->
-                <!--<result property="paymentDate" column="paymentDate" />-->
-                <!--<result property="amount" column="amount" />-->
+            <!--<result property="checkNumber" column="checkNumber" />-->
+            <!--<result property="paymentDate" column="paymentDate" />-->
+            <!--<result property="amount" column="amount" />-->
             <!--</collection>-->
         </association>
         <collection property="orderDetails" ofType="OD">
@@ -52,7 +52,7 @@
         </collection>
     </resultMap>
 
-    <select id="list" parameterType="int" resultMap="map">
+    <select id="list" parameterType="int" resultType="ORDER">
         SELECT * FROM orders where customerNumber=#{value}
         <!--SELECT * FROM orders o,orderdetails od where customerNumber=#{value} and od.orderNumber=o.orderNumber-->
     </select>
