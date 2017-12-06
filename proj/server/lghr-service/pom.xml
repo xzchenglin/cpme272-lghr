@@ -160,6 +160,12 @@
             <version>3.0.0</version>
             <type>jar</type>
         </dependency>
+        <!-- hyunwook shin -->
+        <dependency>
+            <groupId>com.hynnet</groupId>
+            <artifactId>tinyradius</artifactId>
+            <version>1.0</version>
+        </dependency>
 
     </dependencies>
 
