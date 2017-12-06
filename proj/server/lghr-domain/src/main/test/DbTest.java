@@ -25,7 +25,7 @@ public class DbTest {
         o.setProductName("name1");
 
         manager.create(o);
-        o.setProductDescription("vvv");
+        o.setProductDescription(null);
         manager.update(o);
 
         Product ret = manager.getById(key);

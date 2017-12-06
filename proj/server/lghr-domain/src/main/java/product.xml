@@ -50,7 +50,9 @@
         productScale=#{productScale},
         productVendor=#{productVendor},
         productLine=#{productLine},
-        productDescription=#{productDescription},
+        <if test="productDescription != null">
+            productDescription=#{productDescription},
+        </if>
         quantityInStock=#{quantityInStock},
         buyPrice=#{buyPrice},
         MSRP=#{MSRP}

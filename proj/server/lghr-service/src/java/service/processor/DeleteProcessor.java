@@ -6,7 +6,7 @@ import db.*;
 /***
  *Created by Lin Cheng
  */
-public class DeleteProcessor extends GetProcessor {
+public class DeleteProcessor extends UrlProcessor {
     @Override
     String handle() throws Exception {
 

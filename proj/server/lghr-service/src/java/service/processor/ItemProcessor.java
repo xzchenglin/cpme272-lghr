@@ -3,12 +3,11 @@ package service.processor;
 import common.JsonHelper;
 import db.BaseDao;
 import db.OrderImpl;
-import db.ProductImpl;
 
 /***
  *Created by Lin Cheng
  */
-public class ItemProcessor extends GetProcessor {
+public class ItemProcessor extends UrlProcessor {
     @Override
     String handle() throws Exception {
 
