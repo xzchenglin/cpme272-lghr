@@ -15,11 +15,11 @@ public class AuthService extends RadiusServer {
    static AuthService instance = new AuthService();
    
    public String getSharedSecret( InetSocketAddress socket ) {
-      return "secret";
+      return "lghr";
    }
 
    public String getUserPassword( String user ) {
-      return "pass";
+      return "world";
    }
 
    public static void main(String[] args) {
