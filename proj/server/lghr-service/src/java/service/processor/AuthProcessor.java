@@ -31,7 +31,7 @@ public class AuthProcessor extends PostProcessor {
           System.out.println( "Username is " + username );
           String token = authenticate( username, password );
           info.put("error", "");
-          info.put("value", "token" );
+          info.put("value", token );
        } catch (Exception e) {
           info.put("error", "Not authenticated");
           info.put("value", "" );
