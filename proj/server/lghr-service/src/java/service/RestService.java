@@ -52,6 +52,9 @@ public class RestService extends CamelService {
             public void configure() throws Exception {
                 restConfiguration().component("restlet").host("localhost").port(8272).bindingMode(RestBindingMode.auto);
 
+                rest("/authenticate").enableCORS(true)
+                        .post("/login").to("direct:authenticate");
+
                 rest("/twitter").enableCORS(true)
                         .post("/api").to("direct:twitter"); /* hyunwook shin */
 
@@ -75,6 +78,8 @@ public class RestService extends CamelService {
                         .process(new CreateProcessor());
                 from("direct:update")
                         .process(new UpdateProcessor());
+                from("direct:authenticate")
+                        .process(new AuthProcessor());
             }
         });
     }
