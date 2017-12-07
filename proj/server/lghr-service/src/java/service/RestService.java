@@ -63,6 +63,7 @@ public class RestService extends CamelService {
                         .get("/item").to("direct:item")
                         .delete("/del").to("direct:del")
                         .post("/create").to("direct:create")
+                        .post("/exlogin").to("direct:exlogin")
                         .post("/update").to("direct:update");
 
                 from("direct:twitter")
@@ -80,6 +81,8 @@ public class RestService extends CamelService {
                         .process(new UpdateProcessor());
                 from("direct:authenticate")
                         .process(new AuthProcessor());
+                from("direct:exlogin")
+                        .process(new ExloginProcessor());
             }
         });
     }
