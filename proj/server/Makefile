@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# Hyunwook Shin
+#
+
 JAR_FILE = lghr-service/target/lghr-service-1.0.jar
 
 clean:

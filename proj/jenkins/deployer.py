@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+#
+# Hyunwook Shin
+#
+
 import os
 import boto3
 import copy

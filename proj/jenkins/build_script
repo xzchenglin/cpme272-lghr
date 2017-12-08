@@ -1,3 +1,7 @@
+#
+# Hyunwook Shin
+#
+
 whoami
 echo $HOME
 jarfile="proj/server/lghr-service/target/lghr-service-1.0.jar"
