@@ -1,26 +1,8 @@
 whoami
 echo $HOME
-jarfile="lghr-service/target/lghr-service-1.0.jar"
+jarfile="proj/server/lghr-service/target/lghr-service-1.0.jar"
+deployer="proj/server/lghr-service/src/jenkins/deployer.py"
 
-if [ ! -d cmpe272-jenkins ]; then 
-   git clone git@github.com:h7shin/cmpe272-jenkins.git
-   cd cmpe272-jenkins
-else
-   cd cmpe272-jenkins
-   git pull
-fi
-
-
-set +x #keep this here
-. $aws_keys
-set -x #keep this here
-
-./deployer.py --deploy
-sleep 10
-
-hostname=$(./deployer.py --host)
-
-cd ..
 if [ ! -d cpme272-lghr ]; then
    git clone git@github.com:xzchenglin/cpme272-lghr.git
    cd cpme272-lghr
@@ -29,9 +11,25 @@ else
    git pull
 fi
 
+function cleanup() {
+   cd ../..
+   $deployer --destroy
+}
+trap cleanup EXIT
+
+set +x #keep this here
+. $aws_keys
+set -x #keep this here
+
+$deployer --deploy
+sleep 10
+
+hostname=`$deployer --host`
+
 cd proj/server/
 mvn clean install
-scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 $jarfile ec2-user@$hostname:/tmp
+
+scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ../../$jarfile ec2-user@$hostname:/tmp
 ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-user@$hostname java -version
 ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-user@$hostname sudo yum install java-1.8.0 -y
 ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-user@$hostname sudo yum remove java-1.7.0-openjdk -y
@@ -39,8 +37,4 @@ ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-
 ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-user@$hostname java -cp /tmp/lghr-service-1.0.jar service.RestService &
 
 sleep 10
-
-cd ..
-cd cmpe272-jenkins
-./deployer.py --destroy
-
+cleanup
