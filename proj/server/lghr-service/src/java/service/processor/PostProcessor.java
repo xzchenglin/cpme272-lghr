@@ -26,6 +26,7 @@ abstract class PostProcessor implements Processor {
         InputStream inputStream = exchange.getIn().getBody(InputStream.class);
         try {
             body = "";
+            paramMap = new HashMap<>();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line;

@@ -2,6 +2,7 @@ package service.processor;
 
 import common.JsonHelper;
 import db.BaseDao;
+import db.CustomerImpl;
 import db.OrderImpl;
 
 /***
@@ -15,7 +16,7 @@ public class ItemProcessor extends UrlProcessor {
 
         switch (paramMap.get("type")){
             case "customer":
-                dao = new OrderImpl();
+                dao = new CustomerImpl();
                 return JsonHelper.toJson(dao.getById(paramMap.get("id")));
             case "order":
                 dao = new OrderImpl();
