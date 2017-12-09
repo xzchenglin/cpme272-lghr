@@ -40,6 +40,9 @@ ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-
 
 sleep 10
 wget http://$hostname:8272/authenticate/login?a=b --post-data="{}"
+
+
+pwd
+ls -lrt
 sleep 120
-cd ../..
 cleanup
