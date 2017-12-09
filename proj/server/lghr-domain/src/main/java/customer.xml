@@ -20,6 +20,7 @@
         <result property="state" column="state" />
         <result property="creditLimit" column="creditLimit" />
         <result property="externalId" column="externalId" />
+        <result property="email" column="email" />
         <collection property="orders" ofType="ORDER">
             <id column="orderNumber" property="orderNumber"/>
             <result property="orderDate" column="orderDate" />

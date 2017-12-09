@@ -20,6 +20,7 @@ public class Customer {
     String postalCode;
     String country;
     String state;
+    String email;
     double creditLimit;
 
     List<Order> orders;
@@ -32,6 +33,14 @@ public class Customer {
 //    public void setPayments(List<Payment> payments) {
 //        this.payments = payments;
 //    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public List<Order> getOrders() {
         return orders;

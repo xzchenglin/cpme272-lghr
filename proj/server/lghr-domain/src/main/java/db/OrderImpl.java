@@ -4,6 +4,7 @@ import model.Order;
 import model.OrderDetail;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,6 +14,9 @@ public class OrderImpl extends BasePOJO implements OrderDao {
     @Override
     public Order create(Order o) throws Exception {
         SqlSession s = client.openSession();
+        if(o.getOrderDate() == null){
+            o.setOrderDate(new Date());
+        }
         s.insert("ns.order.create", o);
         o.getOrderDetails().stream().forEach(d->d.setOrderNumber(o.getOrderNumber()));
         s.insert("ns.order.createDetails", o.getOrderDetails());
