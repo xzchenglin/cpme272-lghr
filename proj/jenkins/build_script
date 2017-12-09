@@ -1,11 +1,8 @@
-#
-# Hyunwook Shin
-#
-
 whoami
 echo $HOME
 jarfile="proj/server/lghr-service/target/lghr-service-1.0.jar"
-deployer="proj/server/lghr-service/src/jenkins/deployer.py"
+lib="proj/server/lghr-service/target/lib"
+deployer="proj/jenkins/deployer.py"
 
 if [ ! -d cpme272-lghr ]; then
    git clone git@github.com:xzchenglin/cpme272-lghr.git
@@ -34,11 +31,14 @@ cd proj/server/
 mvn clean install
 
 scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ../../$jarfile ec2-user@$hostname:/tmp
+scp -r -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ../../$lib ec2-user@$hostname:/tmp
 ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-user@$hostname java -version
 ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-user@$hostname sudo yum install java-1.8.0 -y
 ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-user@$hostname sudo yum remove java-1.7.0-openjdk -y
 ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-user@$hostname java -version
 ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null  -i $FirstEC2 ec2-user@$hostname java -cp /tmp/lghr-service-1.0.jar service.RestService &
 
+sleep 10
+wget http://$hostname:8272/authenticate/login?a=b --post-data="{}"
 sleep 10
 cleanup
